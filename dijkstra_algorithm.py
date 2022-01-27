@@ -3,8 +3,9 @@ path between nodes in a graph. Written as a learning exercise, so lots of
 comments and no error handling.
 """
 from collections import deque
+import math
 
-INFINITY = float("inf")
+INFINITY = math.inf
 
 
 class Graph:
@@ -28,11 +29,13 @@ class Graph:
         with open(filename) as fhandle:
             for line in fhandle:
                 edge_from, edge_to, cost, *_ = line.strip().split(" ")
-                graph_edges.append((edge_from, edge_to, float(cost)))
+                graph_edges.append((edge_from, edge_to, float(cost))) # why float()?
+                # [('A', 'B', 5.0), ('A', 'C', 3.0), ('A', 'D', 6.0), ('B', 'C', 6.0), ('B', 'E', 4.0), ('C', 'E', 6.0), ('C', 'D', 7.0), ('D', 'F', 2.0), ('D', 'E', 2.0), ('E', 'G', 3.0), ('E', 'F', 4.0), ('F', 'G', 5.0
 
         self.nodes = set()
         for edge in graph_edges:
             self.nodes.update([edge[0], edge[1]])
+            # return {'B', 'D', 'F', 'E', 'C', 'A', 'G'}
 
         self.adjacency_list = {node: set() for node in self.nodes}
         for edge in graph_edges:
@@ -50,7 +53,6 @@ class Graph:
         distance_from_start = {
             node: (0 if node == start_node else INFINITY) for node in self.nodes
         }
-
         # Initialize previous_node, the dictionary that maps each node to the
         # node it was visited from when the the shortest path to it was found.
         previous_node = {node: None for node in self.nodes}
@@ -61,6 +63,7 @@ class Graph:
             current_node = min(
                 unvisited_nodes, key=lambda node: distance_from_start[node]
             )
+            # remove A: 0 because it's visited right not
             unvisited_nodes.remove(current_node)
 
             # If current_node's distance is INFINITY, the remaining unvisited

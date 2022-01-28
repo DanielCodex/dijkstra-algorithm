@@ -76,7 +76,13 @@ class Graph:
             # currently have for that node. If it is, update the neighbor's values
             # for distance_from_start and previous_node.
             for neighbor, distance in self.adjacency_list[current_node]:
+                print(f"current_node={current_node} & nieghbour={neighbor} & distance={distance}")
+                print(f"distance={distance}")
                 new_path = distance_from_start[current_node] + distance
+                print(f"new_path={new_path}")
+                print(f"distance_From_start={distance_from_start}")
+                print(f"previous_node={previous_node}")
+
                 if new_path < distance_from_start[neighbor]:
                     distance_from_start[neighbor] = new_path
                     previous_node[neighbor] = current_node
@@ -94,6 +100,7 @@ class Graph:
             current_node = previous_node[current_node]
         path.appendleft(start_node)
 
+        print(distance_from_start)
         return path, distance_from_start[end_node]
 
 
@@ -107,27 +114,27 @@ def main():
         path=["A", "D", "E", "G"],
         distance=11,
     )
-    verify_algorithm(
-        filename="seattle_area.txt",
-        start="Renton",
-        end="Redmond",
-        path=["Renton", "Factoria", "Bellevue", "Northup", "Redmond"],
-        distance=16,
-    )
-    verify_algorithm(
-        filename="seattle_area.txt",
-        start="Seattle",
-        end="Redmond",
-        path=["Seattle", "Eastlake", "Northup", "Redmond"],
-        distance=15,
-    )
-    verify_algorithm(
-        filename="seattle_area.txt",
-        start="Eastlake",
-        end="Issaquah",
-        path=["Eastlake", "Seattle", "SoDo", "Factoria", "Issaquah"],
-        distance=21,
-    )
+    # verify_algorithm(
+    #     filename="seattle_area.txt",
+    #     start="Renton",
+    #     end="Redmond",
+    #     path=["Renton", "Factoria", "Bellevue", "Northup", "Redmond"],
+    #     distance=16,
+    # )
+    # verify_algorithm(
+    #     filename="seattle_area.txt",
+    #     start="Seattle",
+    #     end="Redmond",
+    #     path=["Seattle", "Eastlake", "Northup", "Redmond"],
+    #     distance=15,
+    # )
+    # verify_algorithm(
+    #     filename="seattle_area.txt",
+    #     start="Eastlake",
+    #     end="Issaquah",
+    #     path=["Eastlake", "Seattle", "SoDo", "Factoria", "Issaquah"],
+    #     distance=21,
+    # )
 
 
 def verify_algorithm(filename, start, end, path, distance):

@@ -40,6 +40,7 @@ class Graph:
         self.adjacency_list = {node: set() for node in self.nodes}
         for edge in graph_edges:
             self.adjacency_list[edge[0]].add((edge[1], edge[2]))
+        print(self.adjacency_list)
 
     def shortest_path(self, start_node, end_node):
         """Uses Dijkstra's algorithm to determine the shortest path from
@@ -56,6 +57,7 @@ class Graph:
         # Initialize previous_node, the dictionary that maps each node to the
         # node it was visited from when the the shortest path to it was found.
         previous_node = {node: None for node in self.nodes}
+        # print(previous_node)
 
         while unvisited_nodes:
             # Set current_node to the unvisited node with shortest distance
